@@ -19,6 +19,9 @@ Window {
     color: "transparent"
 
     property WeatherStation weatherStation
+    property real defaultLat: 52.520008
+    property real defaultLon: 13.404954
+    property string defaultLocation: "Berlin"
 
     Rectangle {
         anchors.fill: parent
@@ -56,14 +59,19 @@ Window {
                     return
                 }
 
-                var lat = Number(latitudeField.text)
-                var lon = Number(longitudeField.text)
-                if (isNaN(lat) || isNaN(lon)) {
-                    return
-                }
+                var locationText = locationField.text.trim()
+                var latitudeText = latitudeField.text.trim()
+                var longitudeText = longitudeField.text.trim()
+
+                var lat = latitudeText.length > 0 ? Number(latitudeText) : settingsWindow.defaultLat
+                var lon = longitudeText.length > 0 ? Number(longitudeText) : settingsWindow.defaultLon
+                if (isNaN(lat))
+                    lat = settingsWindow.defaultLat
+                if (isNaN(lon))
+                    lon = settingsWindow.defaultLon
 
                 settingsWindow.weatherStation.locationName =
-                        locationField.text.length > 0 ? locationField.text : "Berlin"
+                        locationText.length > 0 ? locationText : settingsWindow.defaultLocation
                 settingsWindow.weatherStation.latitude = lat
                 settingsWindow.weatherStation.longitude = lon
                 settingsWindow.weatherStation.showSeconds = showSecondsCheck.checked
@@ -81,7 +89,7 @@ Window {
                 height: 28
                 radius: 14
                 anchors.top: parent.top
-                anchors.left: parent.left
+                anchors.right: parent.right
                 color: saveMouse.containsMouse ? "#ccffffff" : "#99ffffff"
                 border.color: "#40ffffff"
                 border.width: 1
@@ -112,7 +120,7 @@ Window {
                 height: 28
                 radius: 14
                 anchors.top: parent.top
-                anchors.right: parent.right
+                anchors.left: parent.left
                 color: cancelMouse.containsMouse ? "#ccffffff" : "#99ffffff"
                 border.color: "#40ffffff"
                 border.width: 1

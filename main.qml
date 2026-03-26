@@ -96,7 +96,7 @@ ApplicationWindow {
                 height: 28
                 radius: 14
                 anchors.top: parent.top
-                anchors.left: parent.left
+                anchors.right: parent.right
                 color: settingsMouse.containsMouse ? "#c0a0a0a0" : "#90909090"
                 border.color: "#40ffffff"
                 border.width: 1
@@ -128,7 +128,7 @@ ApplicationWindow {
                 height: 28
                 radius: 14
                 anchors.top: parent.top
-                anchors.right: parent.right
+                anchors.left: parent.left
                 color: closeMouse.containsMouse ? "#ccffffff" : "#99ffffff"
                 border.color: "#40ffffff"
                 border.width: 1
