@@ -1,6 +1,45 @@
-Aufgaben:
+# Funktionalität:
 
-1) Die C++-Klasse WeatherStation wird über "import Backend 1.0" in die main.qml eingebunden und ein Objekt erstellt
-2) Links - analog zur Tür rechts - soll ein Zahnradsymbol in grauer Farbe eingefügt werden. Klickt man auf das Symbol öffnet sich ein neues Fester. Dort gibt es drei Werte :  1) Ort - hier kann der Ort (einschließlich Breiten-/Längengrad) hinterlegt Werden. Die Voreinstellung ist Berlin. 2) Datenlieferant:  Open-Meteo - kann noch nicht verändert werden. Beim Bestätigen und gleichzeitigen Schließen wird der Wert in das Objekt der Klasse WeatherStation geschrieben. 3) Ob die Uhzeit auch die Sekunden anzeigen soll
-3)  Alle 10 Minuten fragt die "main.qml" die Messwerte (Temperatur, Luftfeuchte und Luftdruck) bei der "WeatherStation" ab und aktualisiert die Anzeige. Die "WeatherStation" wiederum fragt die Messwerte bei Daten-Lieferanten Open-Meteo ab.
-4) "main.qml" Zusätzlich soll der Ort angegeben werden.
+## 1. Fenster: Wetterstation (main.qml)
+
+Wetterstation zeigt folgendes an:
+
+- Überschrift: Wetterstation
+- Ort
+- Datum
+- Uhrzeit: a) mit Sekunden, b) ohne Sekunden
+- Temperatur, Luftfeuchte und Luftdruck
+
+Hat folgende Buttons:
+
+- oben rechts: Einstellungen
+
+- oben links: Applikation beenden
+
+  
+## 2. Fenster: Einstellungen (settings.qml)
+
+Einstellungen bietet folgende Parameter zum einstellen an:
+
+- Ort: Vorbelegung Berlin
+- Breitengrad: Vorbelegung 52.52008
+- Längengrad: Vorbelegung 13.404954
+- Datenlieferant: Vorbelegung Open-Meteo; aktuell nicht veränderbar
+- Urzeit mit Sekunden anzeigen: Vorbelegung ja, Haken gesetzt
+
+Hat folgende Buttons:
+
+- oben rechts: Daten wie, Ort, Breitengrad, Längengrad und "Uhrzeit mit Sekunden anzeigen" werden in das Objekt weatherStation geschrieben werden, dann wird das Fenster geschlossen. Die Wetterstation aktualisiert ihre Anzeigedaten.
+- oben links: Das Fenster wird beendet, ohne das die Daten in in das Objekt weatherStation geschrieben werden.
+
+
+
+## 3. Aufgaben
+
+- Im Fenster: Einstellungen (settings.qml) soll es folgende Defaultwerte - siehe unten - geben. Hat der Benutzer einen Wert vergessen, werden die  Defaultwerte verwendet:
+
+property real defaultLat: 52.520008
+property real defaultLon: 13.404954
+property string defaultLocation: "Berlin"
+
+- Prüfe, ob alles wie vorgehend beschrieben auch funktioniert.
