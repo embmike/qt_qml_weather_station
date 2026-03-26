@@ -19,7 +19,7 @@ Window {
     color: "transparent"
 
     property WeatherStation weatherStation
-    property real defaultLat: 52.52008
+    property real defaultLat: 52.520007
     property real defaultLon: 13.404954
     property string defaultLocation: "Berlin"
 

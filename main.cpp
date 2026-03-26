@@ -12,7 +12,8 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<WeatherStation>("Backend", 1, 0, "WeatherStation");
 
-    QQmlApplicationEngine engine;
+    QQmlApplicationEngine engine{};
+
     const QUrl url(QStringLiteral("qrc:/qt_qml_weather_station/main.qml"));
     QObject::connect(
         &engine,

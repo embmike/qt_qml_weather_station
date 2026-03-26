@@ -20,22 +20,22 @@ class WeatherStation : public QObject
 public:
     explicit WeatherStation(QObject *parent = nullptr);
 
-    double temperature() const noexcept { return m_temperature; }
-    int humidity() const noexcept { return m_humidity; }
-    double pressure() const noexcept { return m_pressure; }
+    double temperature() const noexcept { return _temperature; }
+    int humidity() const noexcept { return _humidity; }
+    double pressure() const noexcept { return _pressure; }
 
-    QString locationName() const { return m_locationName; }
+    QString locationName() const { return _locationName; }
     void setLocationName(const QString &name);
 
-    double latitude() const noexcept { return m_latitude; }
+    double latitude() const noexcept { return _latitude; }
     void setLatitude(double value);
 
-    double longitude() const noexcept { return m_longitude; }
+    double longitude() const noexcept { return _longitude; }
     void setLongitude(double value);
 
     QString dataProvider() const { return QStringLiteral("Open-Meteo"); }
 
-    bool showSeconds() const noexcept { return m_showSeconds; }
+    bool showSeconds() const noexcept { return _showSeconds; }
     void setShowSeconds(bool value);
 
     Q_INVOKABLE void fetch();
@@ -46,14 +46,14 @@ signals:
     void errorOccurred(const QString &message);
 
 private:
-    double m_temperature {0.0};
-    int m_humidity {0};
-    double m_pressure {0.0};
+    double _temperature {0.0};
+    int _humidity {0};
+    double _pressure {0.0};
 
-    QString m_locationName {QStringLiteral("Berlin")};
-    double m_latitude {52.52008};
-    double m_longitude {13.404954};
-    bool m_showSeconds {true};
+    QString _locationName {QStringLiteral("Berlin")};
+    double _latitude {52.520007};
+    double _longitude {13.404954};
+    bool _showSeconds {true};
 
-    QNetworkAccessManager *m_networkManager {nullptr};
+    QNetworkAccessManager *_networkManager {nullptr};
 };
