@@ -19,7 +19,7 @@ Window {
     color: "transparent"
 
     property WeatherStation weatherStation
-    property real defaultLat: 52.520008
+    property real defaultLat: 52.52008
     property real defaultLon: 13.404954
     property string defaultLocation: "Berlin"
 
@@ -50,6 +50,7 @@ Window {
         }
 
         Item {
+            id: formRoot
             anchors.fill: parent
             anchors.margins: 14
 
@@ -89,7 +90,7 @@ Window {
                 height: 28
                 radius: 14
                 anchors.top: parent.top
-                anchors.right: parent.right
+                anchors.left: parent.left
                 color: saveMouse.containsMouse ? "#ccffffff" : "#99ffffff"
                 border.color: "#40ffffff"
                 border.width: 1
@@ -109,7 +110,7 @@ Window {
                     hoverEnabled: true
                     onClicked: function(mouse) {
                         mouse.accepted = true
-                        settingsWindow.applyAndClose()
+                        formRoot.applyAndClose()
                     }
                 }
             }
@@ -120,7 +121,7 @@ Window {
                 height: 28
                 radius: 14
                 anchors.top: parent.top
-                anchors.left: parent.left
+                anchors.right: parent.right
                 color: cancelMouse.containsMouse ? "#ccffffff" : "#99ffffff"
                 border.color: "#40ffffff"
                 border.width: 1
@@ -140,7 +141,7 @@ Window {
                     hoverEnabled: true
                     onClicked: function(mouse) {
                         mouse.accepted = true
-                        settingsWindow.discardAndClose()
+                        formRoot.discardAndClose()
                     }
                 }
             }
@@ -202,7 +203,7 @@ Window {
                             id: latitudeField
                             Layout.fillWidth: true
                             text: settingsWindow.weatherStation ? settingsWindow.weatherStation.latitude.toFixed(6) : ""
-                            placeholderText: "52.520008"
+                            placeholderText: "52.52008"
                             validator: DoubleValidator { notation: DoubleValidator.StandardNotation }
 
                             background: Rectangle {

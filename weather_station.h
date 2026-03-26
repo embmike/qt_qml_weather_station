@@ -51,7 +51,7 @@ private:
     double m_pressure {0.0};
 
     QString m_locationName {QStringLiteral("Berlin")};
-    double m_latitude {52.520008};
+    double m_latitude {52.52008};
     double m_longitude {13.404954};
     bool m_showSeconds {true};
 
