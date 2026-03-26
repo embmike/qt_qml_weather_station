@@ -14,9 +14,9 @@ Wetterstation zeigt folgendes an:
 
 Hat folgende Buttons:
 
-- oben rechts: Einstellungen
+- Button oben links: Einstellungen
 
-- oben links: Applikation beenden
+- Button oben rechts: Applikation beenden
 
   
 ## 2. Fenster: Einstellungen (settings.qml)
@@ -31,17 +31,19 @@ Einstellungen bietet folgende Parameter zum einstellen an:
 
 Hat folgende Buttons:
 
-- oben rechts: Daten wie, Ort, Breitengrad, Längengrad und "Uhrzeit mit Sekunden anzeigen" werden in das Objekt weatherStation geschrieben werden, dann wird das Fenster geschlossen. Die Wetterstation aktualisiert ihre Anzeigedaten.
-- oben links: Das Fenster wird beendet, ohne das die Daten in in das Objekt weatherStation geschrieben werden.
+- Button oben links: Daten wie, Ort, Breitengrad, Längengrad und "Uhrzeit mit Sekunden anzeigen" werden in das Objekt weatherStation geschrieben werden, dann wird das Fenster geschlossen. Die Wetterstation aktualisiert ihre Anzeigedaten.
+- Button oben rechts: Das Fenster wird beendet, ohne das die Daten in in das Objekt weatherStation geschrieben werden.
 
 
 
 ## 3. Aufgaben
 
-- Im Fenster: Einstellungen (settings.qml) soll es folgende Defaultwerte - siehe unten - geben. Hat der Benutzer einen Wert vergessen, werden die  Defaultwerte verwendet:
+- Fenster: Wetterstation (main.qml) sind die Buttons vertsaucht
+- Fenster: Einstellungen (settings.qml), sind die Buttons vertauscht.
+- Fenster: Einstellungen (settings.qml), funktionieren die Buttons die Aktionen der Buttons nicht - das Fenster schließt sich nicht.
 
-property real defaultLat: 52.520008
-property real defaultLon: 13.404954
-property string defaultLocation: "Berlin"
+
+
+## 4. Aufgaben
 
 - Prüfe, ob alles wie vorgehend beschrieben auch funktioniert.
