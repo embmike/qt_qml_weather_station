@@ -16,8 +16,6 @@ qt_add_qml_module(appqt_qml_weather_station
     VERSION 1.0
     QML_FILES main.qml
     SOURCES
-    SOURCES sensor.h
-    SOURCES simulated_sensor.h simulated_sensor.cpp
     SOURCES weather_station.h weather_station.cpp
 )
 
