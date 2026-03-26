@@ -17,6 +17,12 @@ class WeatherStation : public QObject
     Q_PROPERTY(QString dataProvider READ dataProvider CONSTANT)
     Q_PROPERTY(bool showSeconds READ showSeconds WRITE setShowSeconds NOTIFY settingsChanged)
 
+    Q_PROPERTY(bool locationLookupValid READ locationLookupValid NOTIFY locationLookupChanged)
+    Q_PROPERTY(bool locationLookupPending READ locationLookupPending NOTIFY locationLookupChanged)
+    Q_PROPERTY(QString lookupLocationName READ lookupLocationName NOTIFY locationLookupChanged)
+    Q_PROPERTY(double lookupLatitude READ lookupLatitude NOTIFY locationLookupChanged)
+    Q_PROPERTY(double lookupLongitude READ lookupLongitude NOTIFY locationLookupChanged)
+
 public:
     explicit WeatherStation(QObject *parent = nullptr);
 
@@ -38,14 +44,28 @@ public:
     bool showSeconds() const noexcept { return _showSeconds; }
     void setShowSeconds(bool value);
 
+    bool locationLookupValid() const noexcept { return _locationLookupValid; }
+    bool locationLookupPending() const noexcept { return _locationLookupPending; }
+    QString lookupLocationName() const { return _lookupLocationName; }
+    double lookupLatitude() const noexcept { return _lookupLatitude; }
+    double lookupLongitude() const noexcept { return _lookupLongitude; }
+
     Q_INVOKABLE void fetch();
+    Q_INVOKABLE void resolveLocation(const QString &location);
 
 signals:
     void dataChanged();
     void settingsChanged();
     void errorOccurred(const QString &message);
+    void locationLookupChanged();
 
 private:
+    void setLookupState(bool valid,
+                        bool pending,
+                        const QString &name,
+                        double latitude,
+                        double longitude);
+
     double _temperature {0.0};
     int _humidity {0};
     double _pressure {0.0};
@@ -54,6 +74,12 @@ private:
     double _latitude {52.520007};
     double _longitude {13.404954};
     bool _showSeconds {true};
+
+    bool _locationLookupValid {true};
+    bool _locationLookupPending {false};
+    QString _lookupLocationName {QStringLiteral("Berlin")};
+    double _lookupLatitude {52.520007};
+    double _lookupLongitude {13.404954};
 
     QNetworkAccessManager *_networkManager {nullptr};
 };

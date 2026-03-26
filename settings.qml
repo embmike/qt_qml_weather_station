@@ -19,43 +19,94 @@ Window {
     color: "transparent"
 
     property WeatherStation weatherStation
+    property string defaultLocation: "Berlin"
     property real defaultLat: 52.520007
     property real defaultLon: 13.404954
-    property string defaultLocation: "Berlin"
 
-    function parseCoordinate(textValue, fallback) {
-        var normalized = textValue.trim()
-        if (normalized.length === 0)
-            return fallback
-
-        normalized = normalized.replace(",", ".")
-        var directValue = Number(normalized)
-        if (!isNaN(directValue))
-            return directValue
-
-        var match = normalized.match(/-?\d+(?:\.\d+)?/)
-        if (match && match.length > 0) {
-            var extractedValue = Number(match[0])
-            if (!isNaN(extractedValue))
-                return extractedValue
-        }
-
-        return fallback
-    }
+    property bool previewValid: true
+    property bool previewPending: false
+    property string previewLatText: ""
+    property string previewLonText: ""
 
     function syncFieldsFromSettings() {
         if (!settingsWindow.weatherStation)
             return
 
         locationField.text = settingsWindow.weatherStation.locationName
-        latitudeField.text = settingsWindow.weatherStation.latitude.toFixed(6)
-        longitudeField.text = settingsWindow.weatherStation.longitude.toFixed(6)
+        previewLatText = settingsWindow.weatherStation.latitude.toFixed(6)
+        previewLonText = settingsWindow.weatherStation.longitude.toFixed(6)
+        previewValid = true
+        previewPending = false
         showSecondsCheck.checked = settingsWindow.weatherStation.showSeconds
+    }
+
+    function applyAndClose() {
+        if (!settingsWindow.weatherStation) {
+            settingsWindow.visible = false
+            return
+        }
+
+        var locationText = locationField.text.trim()
+
+        if (locationText.length === 0) {
+            settingsWindow.weatherStation.locationName = settingsWindow.defaultLocation
+            settingsWindow.weatherStation.latitude = settingsWindow.defaultLat
+            settingsWindow.weatherStation.longitude = settingsWindow.defaultLon
+            settingsWindow.weatherStation.showSeconds = showSecondsCheck.checked
+            settingsWindow.weatherStation.fetch()
+            settingsWindow.visible = false
+            return
+        }
+
+        if (!previewValid || previewPending)
+            return
+
+        settingsWindow.weatherStation.locationName = locationText
+        settingsWindow.weatherStation.latitude = Number(previewLatText)
+        settingsWindow.weatherStation.longitude = Number(previewLonText)
+        settingsWindow.weatherStation.showSeconds = showSecondsCheck.checked
+        settingsWindow.weatherStation.fetch()
+        settingsWindow.visible = false
+    }
+
+    function discardAndClose() {
+        settingsWindow.visible = false
     }
 
     onVisibleChanged: {
         if (visible)
             syncFieldsFromSettings()
+    }
+
+    Connections {
+        target: settingsWindow.weatherStation
+
+        function onLocationLookupChanged() {
+            if (!settingsWindow.visible || !settingsWindow.weatherStation)
+                return
+
+            previewPending = settingsWindow.weatherStation.locationLookupPending
+            previewValid = settingsWindow.weatherStation.locationLookupValid
+
+            if (previewValid) {
+                previewLatText = settingsWindow.weatherStation.lookupLatitude.toFixed(6)
+                previewLonText = settingsWindow.weatherStation.lookupLongitude.toFixed(6)
+            } else {
+                previewLatText = ""
+                previewLonText = ""
+            }
+        }
+    }
+
+    Timer {
+        id: geocodeTimer
+        interval: 450
+        repeat: false
+        onTriggered: {
+            if (!settingsWindow.weatherStation)
+                return
+            settingsWindow.weatherStation.resolveLocation(locationField.text)
+        }
     }
 
     Rectangle {
@@ -85,35 +136,8 @@ Window {
         }
 
         Item {
-            id: formRoot
             anchors.fill: parent
             anchors.margins: 14
-
-            function applyAndClose() {
-                if (!settingsWindow.weatherStation) {
-                    settingsWindow.visible = false
-                    return
-                }
-
-                var locationText = locationField.text.trim()
-                var latitudeText = latitudeField.text.trim()
-                var longitudeText = longitudeField.text.trim()
-
-                var lat = settingsWindow.parseCoordinate(latitudeText, settingsWindow.weatherStation.latitude)
-                var lon = settingsWindow.parseCoordinate(longitudeText, settingsWindow.weatherStation.longitude)
-
-                settingsWindow.weatherStation.locationName =
-                        locationText.length > 0 ? locationText : settingsWindow.defaultLocation
-                settingsWindow.weatherStation.latitude = lat
-                settingsWindow.weatherStation.longitude = lon
-                settingsWindow.weatherStation.showSeconds = showSecondsCheck.checked
-                settingsWindow.weatherStation.fetch()
-                settingsWindow.visible = false
-            }
-
-            function discardAndClose() {
-                settingsWindow.visible = false
-            }
 
             Rectangle {
                 id: saveButton
@@ -141,7 +165,7 @@ Window {
                     hoverEnabled: true
                     onClicked: function(mouse) {
                         mouse.accepted = true
-                        formRoot.applyAndClose()
+                        settingsWindow.applyAndClose()
                     }
                 }
             }
@@ -172,7 +196,7 @@ Window {
                     hoverEnabled: true
                     onClicked: function(mouse) {
                         mouse.accepted = true
-                        formRoot.discardAndClose()
+                        settingsWindow.discardAndClose()
                     }
                 }
             }
@@ -197,7 +221,7 @@ Window {
 
                     Text {
                         text: "Ort"
-                        color: "#eef7ff"
+                        color: (!previewPending && locationField.text.trim().length > 0 && !previewValid) ? "#ff8b8b" : "#eef7ff"
                         font.pixelSize: 13
                     }
 
@@ -205,11 +229,22 @@ Window {
                         id: locationField
                         Layout.fillWidth: true
                         placeholderText: "Berlin"
+                        color: (!previewPending && text.trim().length > 0 && !previewValid) ? "#b00020" : "#27313c"
+                        selectedTextColor: "white"
+                        selectionColor: "#5a8fd8"
+
+                        onTextEdited: {
+                            previewPending = true
+                            previewValid = true
+                            previewLatText = ""
+                            previewLonText = ""
+                            geocodeTimer.restart()
+                        }
 
                         background: Rectangle {
                             radius: 10
                             color: "#88ffffff"
-                            border.color: "#40ffffff"
+                            border.color: (!previewPending && locationField.text.trim().length > 0 && !previewValid) ? "#ff8b8b" : "#40ffffff"
                             border.width: 1
                         }
                     }
@@ -232,8 +267,10 @@ Window {
                         TextField {
                             id: latitudeField
                             Layout.fillWidth: true
-                            placeholderText: "52.52008"
-                            validator: DoubleValidator { notation: DoubleValidator.StandardNotation }
+                            readOnly: true
+                            text: previewLatText
+                            placeholderText: ""
+                            color: "#27313c"
 
                             background: Rectangle {
                                 radius: 10
@@ -257,8 +294,10 @@ Window {
                         TextField {
                             id: longitudeField
                             Layout.fillWidth: true
-                            placeholderText: "13.404954"
-                            validator: DoubleValidator { notation: DoubleValidator.StandardNotation }
+                            readOnly: true
+                            text: previewLonText
+                            placeholderText: ""
+                            color: "#27313c"
 
                             background: Rectangle {
                                 radius: 10
@@ -292,6 +331,16 @@ Window {
                             border.color: "#40ffffff"
                             border.width: 1
                         }
+
+                        contentItem: Text {
+                            leftPadding: 12
+                            rightPadding: 12
+                            text: parent.displayText
+                            color: "#8a8a8a"
+                            font.pixelSize: 14
+                            verticalAlignment: Text.AlignVCenter
+                            elide: Text.ElideRight
+                        }
                     }
                 }
 
@@ -308,6 +357,24 @@ Window {
 
                     CheckBox {
                         id: showSecondsCheck
+
+                        indicator: Rectangle {
+                            implicitWidth: 16
+                            implicitHeight: 16
+                            radius: 3
+                            border.color: "#40ffffff"
+                            border.width: 1
+                            color: "#ddffffff"
+
+                            Rectangle {
+                                anchors.centerIn: parent
+                                width: 8
+                                height: 8
+                                radius: 2
+                                color: "#f2a33a"
+                                visible: showSecondsCheck.checked
+                            }
+                        }
                     }
                 }
 
