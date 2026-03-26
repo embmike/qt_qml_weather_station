@@ -23,6 +23,41 @@ Window {
     property real defaultLon: 13.404954
     property string defaultLocation: "Berlin"
 
+    function parseCoordinate(textValue, fallback) {
+        var normalized = textValue.trim()
+        if (normalized.length === 0)
+            return fallback
+
+        normalized = normalized.replace(",", ".")
+        var directValue = Number(normalized)
+        if (!isNaN(directValue))
+            return directValue
+
+        var match = normalized.match(/-?\d+(?:\.\d+)?/)
+        if (match && match.length > 0) {
+            var extractedValue = Number(match[0])
+            if (!isNaN(extractedValue))
+                return extractedValue
+        }
+
+        return fallback
+    }
+
+    function syncFieldsFromSettings() {
+        if (!settingsWindow.weatherStation)
+            return
+
+        locationField.text = settingsWindow.weatherStation.locationName
+        latitudeField.text = settingsWindow.weatherStation.latitude.toFixed(6)
+        longitudeField.text = settingsWindow.weatherStation.longitude.toFixed(6)
+        showSecondsCheck.checked = settingsWindow.weatherStation.showSeconds
+    }
+
+    onVisibleChanged: {
+        if (visible)
+            syncFieldsFromSettings()
+    }
+
     Rectangle {
         anchors.fill: parent
         radius: 18
@@ -64,12 +99,8 @@ Window {
                 var latitudeText = latitudeField.text.trim()
                 var longitudeText = longitudeField.text.trim()
 
-                var lat = latitudeText.length > 0 ? Number(latitudeText) : settingsWindow.defaultLat
-                var lon = longitudeText.length > 0 ? Number(longitudeText) : settingsWindow.defaultLon
-                if (isNaN(lat))
-                    lat = settingsWindow.defaultLat
-                if (isNaN(lon))
-                    lon = settingsWindow.defaultLon
+                var lat = settingsWindow.parseCoordinate(latitudeText, settingsWindow.weatherStation.latitude)
+                var lon = settingsWindow.parseCoordinate(longitudeText, settingsWindow.weatherStation.longitude)
 
                 settingsWindow.weatherStation.locationName =
                         locationText.length > 0 ? locationText : settingsWindow.defaultLocation
@@ -173,7 +204,6 @@ Window {
                     TextField {
                         id: locationField
                         Layout.fillWidth: true
-                        text: settingsWindow.weatherStation ? settingsWindow.weatherStation.locationName : ""
                         placeholderText: "Berlin"
 
                         background: Rectangle {
@@ -202,7 +232,6 @@ Window {
                         TextField {
                             id: latitudeField
                             Layout.fillWidth: true
-                            text: settingsWindow.weatherStation ? settingsWindow.weatherStation.latitude.toFixed(6) : ""
                             placeholderText: "52.52008"
                             validator: DoubleValidator { notation: DoubleValidator.StandardNotation }
 
@@ -228,7 +257,6 @@ Window {
                         TextField {
                             id: longitudeField
                             Layout.fillWidth: true
-                            text: settingsWindow.weatherStation ? settingsWindow.weatherStation.longitude.toFixed(6) : ""
                             placeholderText: "13.404954"
                             validator: DoubleValidator { notation: DoubleValidator.StandardNotation }
 
@@ -264,62 +292,22 @@ Window {
                             border.color: "#40ffffff"
                             border.width: 1
                         }
-
-                        contentItem: Text {
-                            leftPadding: 12
-                            rightPadding: 12
-                            text: parent.displayText
-                            color: "#27313c"
-                            font.pixelSize: 14
-                            verticalAlignment: Text.AlignVCenter
-                            elide: Text.ElideRight
-                        }
                     }
                 }
 
-                Rectangle {
+                RowLayout {
                     Layout.fillWidth: true
-                    radius: 12
-                    color: "#40ffffff"
-                    border.color: "#30ffffff"
-                    border.width: 1
-                    implicitHeight: 42
+                    spacing: 8
+
+                    Text {
+                        text: "Sekunden anzeigen"
+                        color: "#eef7ff"
+                        font.pixelSize: 13
+                        Layout.fillWidth: true
+                    }
 
                     CheckBox {
                         id: showSecondsCheck
-                        anchors.fill: parent
-                        anchors.leftMargin: 10
-                        anchors.rightMargin: 10
-                        checked: settingsWindow.weatherStation ? settingsWindow.weatherStation.showSeconds : true
-                        text: "Uhrzeit mit Sekunden anzeigen"
-
-                        indicator: Rectangle {
-                            implicitWidth: 18
-                            implicitHeight: 18
-                            x: showSecondsCheck.leftPadding
-                            y: parent.height / 2 - height / 2
-                            radius: 4
-                            color: "#ddffffff"
-                            border.color: "#40ffffff"
-                            border.width: 1
-
-                            Rectangle {
-                                anchors.centerIn: parent
-                                width: 10
-                                height: 10
-                                radius: 2
-                                color: "#f2a33a"
-                                visible: showSecondsCheck.checked
-                            }
-                        }
-
-                        contentItem: Text {
-                            text: showSecondsCheck.text
-                            color: "white"
-                            font.pixelSize: 14
-                            verticalAlignment: Text.AlignVCenter
-                            leftPadding: showSecondsCheck.indicator.width + showSecondsCheck.spacing
-                        }
                     }
                 }
 
