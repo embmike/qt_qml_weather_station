@@ -14,7 +14,11 @@ qt_add_executable(appqt_qml_weather_station
 qt_add_qml_module(appqt_qml_weather_station
     URI qt_qml_weather_station
     VERSION 1.0
-    QML_FILES main.qml 
+    QML_FILES main.qml
+    SOURCES
+    SOURCES sensor.h
+    SOURCES simulated_sensor.h simulated_sensor.cpp
+    SOURCES weather_station.h weather_station.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
