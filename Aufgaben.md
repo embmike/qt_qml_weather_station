@@ -1,5 +1,7 @@
 # Funktionalität:
 
+
+
 ## 1. Fenster: Wetterstation (main.qml)
 
 Wetterstation zeigt folgendes an:
