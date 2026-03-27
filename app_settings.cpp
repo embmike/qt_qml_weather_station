@@ -9,6 +9,8 @@
 namespace
 {
 constexpr auto locationKey = "weather/locationName";
+constexpr auto latitudeKey = "weather/latitude";
+constexpr auto longitudeKey = "weather/longitude";
 constexpr auto showSecondsKey = "weather/showSeconds";
 constexpr auto windowXKey = "window/x";
 constexpr auto windowYKey = "window/y";
@@ -27,10 +29,15 @@ void AppSettings::load(WeatherStation *weatherStation, QWindow *window) const
     {
         const QString defaultLocation = weatherStation->locationName();
         const QString locationName = settings.value(QString::fromLatin1(locationKey), defaultLocation).toString();
+        const double latitude = settings.value(QString::fromLatin1(latitudeKey), weatherStation->latitude()).toDouble();
+        const double longitude =
+            settings.value(QString::fromLatin1(longitudeKey), weatherStation->longitude()).toDouble();
         const bool showSeconds = settings.value(QString::fromLatin1(showSecondsKey),
                                                 weatherStation->showSeconds())
                                      .toBool();
         weatherStation->setLocationName(locationName);
+        weatherStation->setLatitude(latitude);
+        weatherStation->setLongitude(longitude);
         weatherStation->setShowSeconds(showSeconds);
     }
 
@@ -53,6 +60,8 @@ void AppSettings::save(const WeatherStation *weatherStation, const QWindow *wind
     if (weatherStation)
     {
         settings.setValue(QString::fromLatin1(locationKey), weatherStation->locationName());
+        settings.setValue(QString::fromLatin1(latitudeKey), weatherStation->latitude());
+        settings.setValue(QString::fromLatin1(longitudeKey), weatherStation->longitude());
         settings.setValue(QString::fromLatin1(showSecondsKey), weatherStation->showSeconds());
     }
 
