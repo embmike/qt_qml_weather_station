@@ -43,7 +43,7 @@ Window {
 
     function applyAndClose() {
         if (!settingsWindow.weatherStation) {
-            settingsWindow.visible = false
+            settingsWindow.close()
             return
         }
 
@@ -57,7 +57,7 @@ Window {
             settingsWindow.weatherStation.fetch()
             if (settingsWindow.saveSettingsCallback)
                 settingsWindow.saveSettingsCallback()
-            settingsWindow.visible = false
+            settingsWindow.close()
             return
         }
 
@@ -71,11 +71,11 @@ Window {
         settingsWindow.weatherStation.fetch()
         if (settingsWindow.saveSettingsCallback)
             settingsWindow.saveSettingsCallback()
-        settingsWindow.visible = false
+        settingsWindow.close()
     }
 
     function discardAndClose() {
-        settingsWindow.visible = false
+        settingsWindow.close()
     }
 
     onVisibleChanged: {
