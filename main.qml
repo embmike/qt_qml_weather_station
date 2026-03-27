@@ -22,6 +22,10 @@ ApplicationWindow {
     property date now: new Date()
     property string weatherError: ""
 
+    AppSettings {
+        id: appSettings
+    }
+
     WeatherStation {
         id: weatherStation
         onDataChanged: weatherError = ""
@@ -44,7 +48,14 @@ ApplicationWindow {
         onTriggered: weatherStation.fetch()
     }
 
-    Component.onCompleted: weatherStation.fetch()
+    Component.onCompleted: {
+        appSettings.load(weatherStation, root)
+        weatherStation.fetch()
+    }
+
+    onClosing: function(closeEvent) {
+        appSettings.save(weatherStation, root)
+    }
 
     Loader {
         id: settingsWindowLoader

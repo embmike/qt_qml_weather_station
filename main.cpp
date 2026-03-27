@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <qqml.h>
 
+#include "app_settings.h"
 #include "weather_station.h"
 
 int main(int argc, char *argv[])
@@ -9,8 +10,11 @@ int main(int argc, char *argv[])
     qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
 
     QGuiApplication app(argc, argv);
+    QCoreApplication::setOrganizationName(QStringLiteral("qt_qml_weather_station"));
+    QCoreApplication::setApplicationName(QStringLiteral("qt_qml_weather_station"));
 
     qmlRegisterType<WeatherStation>("Backend", 1, 0, "WeatherStation");
+    qmlRegisterType<AppSettings>("Backend", 1, 0, "AppSettings");
 
     QQmlApplicationEngine engine{};
 
