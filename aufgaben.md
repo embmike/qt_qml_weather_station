@@ -9,6 +9,7 @@ Wetterstation zeigt folgendes an:
 
 - Überschrift: Wetterstation
 - Ort
+- 🌤 kleines Wetter-Icon basierend auf der genutzten API
 - Datum
 - Uhrzeit: a) mit Sekunden, b) ohne Sekunden
 - Temperatur, Luftfeuchte und Luftdruck
@@ -67,7 +68,9 @@ Aublauf:
 
 ## 3. Neue Aufgaben - neue Funktionalität zum Umsetzen
 
-- 🌤 kleines Wetter-Icon basierend auf API. 👨‍💻
+- Dokumentiere den Code im Doxygen-Stil in Deutsch, nutze für Detailaufgaben das Tag @details. Funktionen werden nur im Header dokumentiert. Wichtig sind Typen und Typen-Mitglieder und ein Dateikopf am Anfang jeder Quelldatei. 👨‍💻
+
+- Vervollständige die README.md in Englisch analog zum Beispiel README_EXAMPLE.md
 
   
 

@@ -7,11 +7,11 @@ ApplicationWindow {
     id: root
     visible: true
     width: 400
-    height: 300
+    height: 360
     minimumWidth: 400
-    maximumWidth: 400
-    minimumHeight: 300
-    maximumHeight: 300
+    maximumWidth: 360
+    minimumHeight: 400
+    maximumHeight: 360
 
     title: "Wetterstation"
 
