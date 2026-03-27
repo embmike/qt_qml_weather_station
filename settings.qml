@@ -357,8 +357,16 @@ Window {
 
                     CheckBox {
                         id: showSecondsCheck
+                        Layout.alignment: Qt.AlignRight | Qt.AlignBottom
+                        leftPadding: 0
+                        rightPadding: 0
+                        topPadding: 0
+                        bottomPadding: 0
+                        spacing: 0
 
                         indicator: Rectangle {
+                            x: showSecondsCheck.width - width
+                            y: showSecondsCheck.height - height
                             implicitWidth: 16
                             implicitHeight: 16
                             radius: 3
