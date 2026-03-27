@@ -13,5 +13,5 @@ public:
     explicit AppSettings(QObject *parent = nullptr);
 
     Q_INVOKABLE void load(WeatherStation *weatherStation, QWindow *window) const;
-    Q_INVOKABLE void save(const WeatherStation *weatherStation, const QWindow *window) const;
+    Q_INVOKABLE void save(WeatherStation *weatherStation, QWindow *window) const;
 };

@@ -53,7 +53,7 @@ void AppSettings::load(WeatherStation *weatherStation, QWindow *window) const
     }
 }
 
-void AppSettings::save(const WeatherStation *weatherStation, const QWindow *window) const
+void AppSettings::save(WeatherStation *weatherStation, QWindow *window) const
 {
     QSettings settings;
 
