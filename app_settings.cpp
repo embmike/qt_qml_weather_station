@@ -9,6 +9,7 @@
 namespace
 {
 constexpr auto locationKey = "weather/locationName";
+constexpr auto showSecondsKey = "weather/showSeconds";
 constexpr auto windowXKey = "window/x";
 constexpr auto windowYKey = "window/y";
 }
@@ -26,7 +27,11 @@ void AppSettings::load(WeatherStation *weatherStation, QWindow *window) const
     {
         const QString defaultLocation = weatherStation->locationName();
         const QString locationName = settings.value(QString::fromLatin1(locationKey), defaultLocation).toString();
+        const bool showSeconds = settings.value(QString::fromLatin1(showSecondsKey),
+                                                weatherStation->showSeconds())
+                                     .toBool();
         weatherStation->setLocationName(locationName);
+        weatherStation->setShowSeconds(showSeconds);
     }
 
     if (window)
@@ -36,8 +41,7 @@ void AppSettings::load(WeatherStation *weatherStation, QWindow *window) const
 
         if (storedX.isValid() && storedY.isValid())
         {
-            window->setX(storedX.toDouble());
-            window->setY(storedY.toDouble());
+            window->setPosition(storedX.toInt(), storedY.toInt());
         }
     }
 }
@@ -49,6 +53,7 @@ void AppSettings::save(const WeatherStation *weatherStation, const QWindow *wind
     if (weatherStation)
     {
         settings.setValue(QString::fromLatin1(locationKey), weatherStation->locationName());
+        settings.setValue(QString::fromLatin1(showSecondsKey), weatherStation->showSeconds());
     }
 
     if (window)
