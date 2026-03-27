@@ -270,7 +270,7 @@ Window {
                             readOnly: true
                             text: previewLatText
                             placeholderText: ""
-                            color: "#27313c"
+                            color: "#6e6e6e"
 
                             background: Rectangle {
                                 radius: 10
@@ -297,7 +297,7 @@ Window {
                             readOnly: true
                             text: previewLonText
                             placeholderText: ""
-                            color: "#27313c"
+                            color: "#6e6e6e"
 
                             background: Rectangle {
                                 radius: 10
@@ -336,7 +336,7 @@ Window {
                             leftPadding: 12
                             rightPadding: 12
                             text: parent.displayText
-                            color: "#8a8a8a"
+                            color: "#6e6e6e"
                             font.pixelSize: 14
                             verticalAlignment: Text.AlignVCenter
                             elide: Text.ElideRight
