@@ -1,8 +1,9 @@
-# Funktionalität:
+# Wetterstation:
 
 
+## 1. Bereits umgesetzte Funktionalität (nur zur Prüfung)
 
-## 1. Fenster: Wetterstation (main.qml)
+### 1.1.  Fenster: Wetterstation (main.qml)
 
 Wetterstation zeigt folgendes an:
 
@@ -28,7 +29,7 @@ Hat folgende Funktionen:
 - Einstellungen: Geklickt. Das Fenster Einstellungen (settings.xml) öffnet sich.
 
   
-## 2. Fenster: Einstellungen (settings.qml)
+### 1.2. Fenster: Einstellungen (settings.qml)
 
 Einstellungen bietet folgende Parameter zum einstellen an:
 
@@ -46,7 +47,7 @@ Hat folgende Buttons und Funktionen:
 
   
 
-## 3. Open-Meteo und Geocoding für die Ermittlung der Wetterdaten (weather_station.h/.cpp)
+### 1.3. Open-Meteo und Geocoding für die Ermittlung der Wetterdaten (weather_station.h/.cpp)
 
 Aublauf:
 
@@ -58,12 +59,18 @@ Aublauf:
 
 
 
-## 3. Fehler
+## 2. Fehler
 
-- Es gibt nichts zu tun: keine Fehler vorhanden.
+- Es gibt nichts zu tun: keine Fehler vorhanden. 😀
 
 
 
-## 4. Aufgaben
+## 3. Neue Aufgaben - neue Funktionalität zum Umsetzen
 
-- Prüfe, ob alles wie vorgehend beschrieben auch funktioniert.
+- 🌤 kleines Wetter-Icon basierend auf API. 👨‍💻
+
+  
+
+## 4. Prüfungen
+
+- Prüfe, ob alles wie vorgehend beschrieben auch funktioniert. 👨‍💻

@@ -248,7 +248,7 @@ Window {
                             geocodeTimer.restart()
                         }
 
-                        /*
+                        /* Wird im Moment nicht unterstützt
                         background: Rectangle {
                             radius: 10
                             color: "#88ffffff"
@@ -281,7 +281,7 @@ Window {
                             placeholderText: ""
                             color: "#6e6e6e"
 
-                            /*
+                            /* Wird im Moment nicht unterstützt
                             background: Rectangle {
                                 radius: 10
                                 color: "#88ffffff"
@@ -310,7 +310,7 @@ Window {
                             placeholderText: ""
                             color: "#6e6e6e"
 
-                            /*
+                            /* Wird im Moment nicht unterstützt
                             background: Rectangle {
                                 radius: 10
                                 color: "#88ffffff"
@@ -338,7 +338,7 @@ Window {
                         currentIndex: 0
                         enabled: false
 
-                        /*
+                        /* Wird im Moment nicht unterstützt
                         background: Rectangle {
                             radius: 10
                             color: "#88ffffff"
@@ -347,7 +347,7 @@ Window {
                         }
                         */
 
-                        /*
+                        /* Wird im Moment nicht unterstützt
                         contentItem: Text {
                             leftPadding: 12
                             rightPadding: 12
@@ -381,7 +381,7 @@ Window {
                         bottomPadding: 0
                         spacing: 0
 
-                        /*
+                        /* Wird im Moment nicht unterstützt
                         indicator: Rectangle {
                             x: showSecondsCheck.width - width
                             y: showSecondsCheck.height - height
