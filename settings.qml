@@ -19,6 +19,7 @@ Window {
     color: "transparent"
 
     property WeatherStation weatherStation
+    property var saveSettingsCallback: null
     property string defaultLocation: "Berlin"
     property real defaultLat: 52.520007
     property real defaultLon: 13.404954
@@ -54,6 +55,8 @@ Window {
             settingsWindow.weatherStation.longitude = settingsWindow.defaultLon
             settingsWindow.weatherStation.showSeconds = showSecondsCheck.checked
             settingsWindow.weatherStation.fetch()
+            if (settingsWindow.saveSettingsCallback)
+                settingsWindow.saveSettingsCallback()
             settingsWindow.visible = false
             return
         }
@@ -66,6 +69,8 @@ Window {
         settingsWindow.weatherStation.longitude = Number(previewLonText)
         settingsWindow.weatherStation.showSeconds = showSecondsCheck.checked
         settingsWindow.weatherStation.fetch()
+        if (settingsWindow.saveSettingsCallback)
+            settingsWindow.saveSettingsCallback()
         settingsWindow.visible = false
     }
 

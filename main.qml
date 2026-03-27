@@ -22,6 +22,10 @@ ApplicationWindow {
     property date now: new Date()
     property string weatherError: ""
 
+    function persistSettings() {
+        appSettings.save(weatherStation, root)
+    }
+
     AppSettings {
         id: appSettings
     }
@@ -54,7 +58,15 @@ ApplicationWindow {
     }
 
     onClosing: function(closeEvent) {
-        appSettings.save(weatherStation, root)
+        root.persistSettings()
+    }
+
+    Connections {
+        target: Qt.application
+
+        function onAboutToQuit() {
+            root.persistSettings()
+        }
     }
 
     Loader {
@@ -64,6 +76,7 @@ ApplicationWindow {
         onLoaded: {
             if (item) {
                 item.weatherStation = weatherStation
+                item.saveSettingsCallback = root.persistSettings
             }
         }
     }
