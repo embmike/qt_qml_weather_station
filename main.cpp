@@ -10,9 +10,15 @@
 #include "app_settings.h"
 #include "weather_station.h"
 
+/**
+ * @brief Einstiegspunkt der Anwendung.
+ * @param argc Anzahl der Kommandozeilenargumente.
+ * @param argv Kommandozeilenargumente.
+ * @return Rückgabecode der Qt-Ereignisschleife.
+ */
 int main(int argc, char *argv[])
 {
-    //qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
+    // qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard")); Wird im Moment nicht verwendet.
 
     QGuiApplication app(argc, argv);
     QCoreApplication::setOrganizationName(QStringLiteral("qt_qml_weather_station"));

@@ -11,6 +11,8 @@ It displays current weather data from **Open-Meteo**, supports location lookup v
 
 <img src="./images/app_settings_view.jpg" alt="Settings window screenshot" width="30%" />
 
+
+
 ## 1) What does the application do?
 
 The app is designed as a compact weather dashboard:
@@ -29,6 +31,8 @@ On startup, it restores:
 
 On exit, it saves the same values.
 
+
+
 ## 2) User interactions and use cases
 
 - **Open settings:** Button in the top-left corner opens the settings window.
@@ -38,6 +42,8 @@ On exit, it saves the same values.
 - **Toggle seconds display:** Enable or disable seconds in the time display.
 - **Apply settings:** Save values back to the backend object and refresh weather data.
 - **Cancel settings:** Close the settings window without applying changes.
+
+
 
 ## 3) Architecture overview
 
@@ -57,6 +63,8 @@ On exit, it saves the same values.
 3. The resolved coordinates are used to call Open-Meteo Forecast API.
 4. Returned current values are published to QML via Qt properties/signals.
 
+
+
 ## 4) File responsibilities
 
 | File | Responsibility |
@@ -70,6 +78,8 @@ On exit, it saves the same values.
 | `images/app_main_view.jpg` | Screenshot of the main weather window. |
 | `images/app_settings_view.jpg` | Screenshot of the settings window. |
 | `LICENSE` | MIT license text. |
+
+
 
 ## 5) Build and run
 
@@ -91,6 +101,9 @@ Run the executable (single-config generators):
 
 For multi-config generators (for example Visual Studio), run the executable from the selected configuration directory.
 
-## License
 
-MIT License. See `LICENSE`.
+
+## Licence
+
+This project is licensed under the terms of the [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+

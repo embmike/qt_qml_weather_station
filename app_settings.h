@@ -34,6 +34,7 @@ public:
      * @param window Zielobjekt für Fensterposition.
      */
     Q_INVOKABLE void load(WeatherStation *weatherStation, QWindow *window) const;
+
     /**
      * @brief Speichert Einstellungen in persistenten Speicher.
      * @param weatherStation Quellobjekt für Wetterstations-Einstellungen.

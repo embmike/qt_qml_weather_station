@@ -50,16 +50,19 @@ public:
      * @return Temperaturwert.
      */
     double temperature() const noexcept { return _temperature; }
+
     /**
      * @brief Liefert die aktuelle relative Luftfeuchtigkeit in Prozent.
      * @return Luftfeuchtigkeit.
      */
     int humidity() const noexcept { return _humidity; }
+
     /**
      * @brief Liefert den aktuellen Luftdruck in hPa.
      * @return Luftdruckwert.
      */
     double pressure() const noexcept { return _pressure; }
+
     /**
      * @brief Liefert den aktuellen Open-Meteo-Wettercode.
      * @return Wettercode.
@@ -71,6 +74,7 @@ public:
      * @return Ortsname.
      */
     QString locationName() const { return _locationName; }
+
     /**
      * @brief Setzt den Ortsnamen.
      * @param name Neuer Ortsname.
@@ -82,6 +86,7 @@ public:
      * @return Breitengrad.
      */
     double latitude() const noexcept { return _latitude; }
+
     /**
      * @brief Setzt den Breitengrad.
      * @param value Neuer Breitengrad.
@@ -93,6 +98,7 @@ public:
      * @return Längengrad.
      */
     double longitude() const noexcept { return _longitude; }
+
     /**
      * @brief Setzt den Längengrad.
      * @param value Neuer Längengrad.
@@ -110,6 +116,7 @@ public:
      * @return true, wenn Sekunden angezeigt werden.
      */
     bool showSeconds() const noexcept { return _showSeconds; }
+
     /**
      * @brief Aktiviert oder deaktiviert die Sekundenanzeige.
      * @param value Neuer Zustand.
@@ -121,21 +128,25 @@ public:
      * @return true bei gültigem Ergebnis.
      */
     bool locationLookupValid() const noexcept { return _locationLookupValid; }
+
     /**
      * @brief Kennzeichnet, ob aktuell eine Geocoding-Anfrage läuft.
      * @return true, solange die Anfrage aussteht.
      */
     bool locationLookupPending() const noexcept { return _locationLookupPending; }
+
     /**
      * @brief Liefert den durch Geocoding ermittelten Ortsnamen.
      * @return Ortsname aus Lookup.
      */
     QString lookupLocationName() const { return _lookupLocationName; }
+
     /**
      * @brief Liefert den durch Geocoding ermittelten Breitengrad.
      * @return Breitengrad aus Lookup.
      */
     double lookupLatitude() const noexcept { return _lookupLatitude; }
+
     /**
      * @brief Liefert den durch Geocoding ermittelten Längengrad.
      * @return Längengrad aus Lookup.
@@ -150,6 +161,7 @@ public:
      * Temperatur, Luftfeuchtigkeit, Luftdruck und Wettercode.
      */
     Q_INVOKABLE void fetch();
+
     /**
      * @brief Löst einen Ortsnamen in Koordinaten auf.
      * @param location Vom Benutzer eingegebener Ortsname.
@@ -165,15 +177,18 @@ signals:
      * @brief Signalisiert geänderte Wetterdaten.
      */
     void dataChanged();
+
     /**
      * @brief Signalisiert geänderte Einstellungen.
      */
     void settingsChanged();
+
     /**
      * @brief Meldet einen Fehlertext für UI-Ausgaben.
      * @param message Fehlermeldung.
      */
     void errorOccurred(const QString &message);
+
     /**
      * @brief Signalisiert geänderten Zustand des Standort-Lookups.
      */
@@ -188,6 +203,7 @@ private:
      * @param latitude Aufgelöster Breitengrad.
      * @param longitude Aufgelöster Längengrad.
      */
+
     void setLookupState(bool valid,
                         bool pending,
                         const QString &name,
@@ -196,30 +212,40 @@ private:
 
     /** @brief Zuletzt geladene Temperatur in Grad Celsius. */
     double _temperature {0.0};
+
     /** @brief Zuletzt geladene relative Luftfeuchtigkeit in Prozent. */
     int _humidity {0};
+
     /** @brief Zuletzt geladener Luftdruck in hPa. */
     double _pressure {0.0};
+
     /** @brief Zuletzt geladener Open-Meteo-Wettercode. */
     int _weatherCode {0};
 
     /** @brief Persistierter Ortsname. */
     QString _locationName {QStringLiteral("Berlin")};
+
     /** @brief Persistierter Breitengrad des Orts. */
     double _latitude {52.520007};
+
     /** @brief Persistierter Längengrad des Orts. */
     double _longitude {13.404954};
+
     /** @brief Einstellung zur Anzeige von Sekunden. */
     bool _showSeconds {true};
 
     /** @brief Kennzeichen für gültiges Geocoding-Ergebnis. */
     bool _locationLookupValid {true};
+
     /** @brief Kennzeichen für laufende Geocoding-Anfrage. */
     bool _locationLookupPending {false};
+
     /** @brief Durch Geocoding aufgelöster Ortsname. */
     QString _lookupLocationName {QStringLiteral("Berlin")};
+
     /** @brief Durch Geocoding aufgelöster Breitengrad. */
     double _lookupLatitude {52.520007};
+
     /** @brief Durch Geocoding aufgelöster Längengrad. */
     double _lookupLongitude {13.404954};
 
