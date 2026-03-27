@@ -1,3 +1,8 @@
+/**
+ * @file app_settings.cpp
+ * @brief Implementierung der Einstellungen-Persistenz über QSettings.
+ */
+
 #include "app_settings.h"
 
 #include <QSettings>
