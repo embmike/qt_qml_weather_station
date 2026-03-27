@@ -15,7 +15,7 @@ qt_add_qml_module(appqt_qml_weather_station
     URI qt_qml_weather_station
     VERSION 1.0
     QML_FILES main.qml settings.qml
-    SOURCES weather_station.h weather_station.cpp
+    SOURCES weather_station.h weather_station.cpp app_settings.h app_settings.cpp
 )
 
 set_target_properties(appqt_qml_weather_station PROPERTIES
