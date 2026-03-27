@@ -1,3 +1,8 @@
+/**
+ * @file main.cpp
+ * @brief Einstiegspunkt der QML-Wetterstations-Anwendung.
+ */
+
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <qqml.h>

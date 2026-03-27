@@ -1,3 +1,8 @@
+/**
+ * @file weather_station.cpp
+ * @brief Implementierung der Wetter- und Geocoding-Logik für die Wetterstation.
+ */
+
 #include "weather_station.h"
 
 #include <QJsonArray>
