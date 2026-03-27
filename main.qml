@@ -22,6 +22,22 @@ ApplicationWindow {
     property date now: new Date()
     property string weatherError: ""
 
+    function weatherIconForCode(code) {
+        if (code === 0) return "☀️"
+        if (code === 1 || code === 2) return "🌤️"
+        if (code === 3) return "☁️"
+        if (code === 45 || code === 48) return "🌫️"
+        if (code === 51 || code === 53 || code === 55
+                || code === 56 || code === 57) return "🌦️"
+        if (code === 61 || code === 63 || code === 65
+                || code === 66 || code === 67
+                || code === 80 || code === 81 || code === 82) return "🌧️"
+        if (code === 71 || code === 73 || code === 75
+                || code === 77 || code === 85 || code === 86) return "🌨️"
+        if (code === 95 || code === 96 || code === 99) return "⛈️"
+        return "🌡️"
+    }
+
     function persistSettings() {
         appSettings.save(weatherStation, root)
     }
@@ -191,6 +207,13 @@ ApplicationWindow {
                     text: weatherStation.locationName
                     color: "#e8f3ff"
                     font.pixelSize: 16
+                    Layout.alignment: Qt.AlignHCenter
+                }
+
+                Text {
+                    text: root.weatherIconForCode(weatherStation.weatherCode)
+                    color: "#fdf7da"
+                    font.pixelSize: 20
                     Layout.alignment: Qt.AlignHCenter
                 }
 
