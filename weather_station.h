@@ -10,6 +10,7 @@ class WeatherStation : public QObject
     Q_PROPERTY(double temperature READ temperature NOTIFY dataChanged)
     Q_PROPERTY(int humidity READ humidity NOTIFY dataChanged)
     Q_PROPERTY(double pressure READ pressure NOTIFY dataChanged)
+    Q_PROPERTY(int weatherCode READ weatherCode NOTIFY dataChanged)
 
     Q_PROPERTY(QString locationName READ locationName WRITE setLocationName NOTIFY settingsChanged)
     Q_PROPERTY(double latitude READ latitude WRITE setLatitude NOTIFY settingsChanged)
@@ -29,6 +30,7 @@ public:
     double temperature() const noexcept { return _temperature; }
     int humidity() const noexcept { return _humidity; }
     double pressure() const noexcept { return _pressure; }
+    int weatherCode() const noexcept { return _weatherCode; }
 
     QString locationName() const { return _locationName; }
     void setLocationName(const QString &name);
@@ -69,6 +71,7 @@ private:
     double _temperature {0.0};
     int _humidity {0};
     double _pressure {0.0};
+    int _weatherCode {0};
 
     QString _locationName {QStringLiteral("Berlin")};
     double _latitude {52.520007};

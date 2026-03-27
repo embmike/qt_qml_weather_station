@@ -91,7 +91,7 @@ void WeatherStation::fetch()
     query.addQueryItem(QStringLiteral("latitude"), QString::number(_latitude, 'f', 6));
     query.addQueryItem(QStringLiteral("longitude"), QString::number(_longitude, 'f', 6));
     query.addQueryItem(QStringLiteral("current"),
-                       QStringLiteral("temperature_2m,relative_humidity_2m,surface_pressure"));
+                       QStringLiteral("temperature_2m,relative_humidity_2m,surface_pressure,weather_code"));
     query.addQueryItem(QStringLiteral("timezone"), QStringLiteral("auto"));
     url.setQuery(query);
 
@@ -131,6 +131,7 @@ void WeatherStation::fetch()
         _temperature = current.value(QStringLiteral("temperature_2m")).toDouble();
         _humidity = current.value(QStringLiteral("relative_humidity_2m")).toInt();
         _pressure = current.value(QStringLiteral("surface_pressure")).toDouble();
+        _weatherCode = current.value(QStringLiteral("weather_code")).toInt();
 
         emit dataChanged();
         cleanup();
