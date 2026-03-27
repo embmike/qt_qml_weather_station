@@ -48,7 +48,12 @@ Hat folgende Buttons und Funktionen:
 ## 3. Fehler
 
 - Einstellungen (settings.xml), Button oben links : Geklickt, Die Daten werden übernommen aber das Fenster wird nicht geschlossen
-- Wetterstation (main.qml), Button oben rechts: Geklickt, das Fenster wird geschlossen und damit die Applikation beendet, aber anscheinend werden die Daten wie Fenster-Position, Ort und Sekunden anzeigen nicht gesichert. Denn wird die Applikation erneut gestartet, ist das Fenster an der Standardposition (Default), sowie auch die anderen Anzeigedaten (Ort und Sekunden anzeigen) stehen auf ihre Standardwerte (Default).
+- Wetterstation (main.qml), Button oben rechts: Geklickt, das Fenster wird geschlossen und damit die Applikation beendet, aber anscheinend werden die Daten wie Fenster-Position, Ort und Sekunden anzeigen nicht gesichert. Denn wird die Applikation erneut gestartet, ist das Fenster an der Standardposition (Default), sowie auch die anderen Anzeigedaten (Ort und Sekunden anzeigen) stehen auf ihre Standardwerte (Default). Siehe Fehlermeldung 1; beim Aufruf der Zeile "appSettings.save(weatherStation, root)", der Funktion "function persistSettings()" des Moduls "main.qml"
+
+Fehlermeldung 1:  onecore\windows\directx\database\helperlibrary\lib\perappusersettingsqueryimpl.cpp(159)\directxdatabasehelper.dll!00007FFEA6C1D9DD: (caller: 00007FFEA6C1D820) ReturnHr(32) tid(7600) 80070002 Das System kann die angegebene Datei nicht finden.
+qrc:/qt_qml_weather_station/main.qml:38: Error: Unknown method parameter type: const WeatherStation*
+
+qrc:/qt_qml_weather_station/main.qml:38: Error: Unknown method parameter type: const WeatherStation* qrc:/qt_qml_weather_station/main.qml: 38
 
 
 
