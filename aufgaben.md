@@ -41,19 +41,26 @@ Einstellungen bietet folgende Parameter zum einstellen an:
 Hat folgende Buttons und Funktionen:
 
 - Button oben links: Geklickt. Geänderte Daten werden in das Objekt weatherStation geschrieben , dann wird das Fenster geschlossen. Die Wetterstation aktualisiert ihre Anzeigedaten.
+
 - Button oben rechts: Geklickt. Das Fenster wird beendet, ohne das die Daten in das Objekt weatherStation geschrieben werden.
+
+  
+
+## 3. Open-Meteo und Geocoding für die Ermittlung der Wetterdaten (weather_station.h/.cpp)
+
+Aublauf:
+
+1. Benutzer gibt **Ort** ein, z. B. `Port d'Antdrax`
+2. deine App ruft zuerst eine **Geocoding-API** auf
+3. die API liefert **Latitude/Longitude**
+4. danach rufst du wie bisher die Wetterdaten mit diesen Koordinaten ab.
+   Open-Meteo hat dafür eine eigene Geocoding-API unter `https://geocoding-api.open-meteo.com/v1/search`, die einen Suchbegriff annimmt und passende Orte mit Koordinaten zurückgibt. Deine Wetterabfrage läuft ja schon über Open-Meteo und verwendet `QNetworkAccessManager`, `QNetworkRequest`, `QUrl` und `QUrlQuery`, was für den zusätzlichen Geocoding-Schritt genau passend ist.
 
 
 
 ## 3. Fehler
 
-- Einstellungen (settings.xml), Button oben links : Geklickt, Die Daten werden übernommen aber das Fenster wird nicht geschlossen
-- Wetterstation (main.qml), Button oben rechts: Geklickt, das Fenster wird geschlossen und damit die Applikation beendet, aber anscheinend werden die Daten wie Fenster-Position, Ort und Sekunden anzeigen nicht gesichert. Denn wird die Applikation erneut gestartet, ist das Fenster an der Standardposition (Default), sowie auch die anderen Anzeigedaten (Ort und Sekunden anzeigen) stehen auf ihre Standardwerte (Default). Siehe Fehlermeldung 1; beim Aufruf der Zeile "appSettings.save(weatherStation, root)", der Funktion "function persistSettings()" des Moduls "main.qml"
-
-Fehlermeldung 1:  onecore\windows\directx\database\helperlibrary\lib\perappusersettingsqueryimpl.cpp(159)\directxdatabasehelper.dll!00007FFEA6C1D9DD: (caller: 00007FFEA6C1D820) ReturnHr(32) tid(7600) 80070002 Das System kann die angegebene Datei nicht finden.
-qrc:/qt_qml_weather_station/main.qml:38: Error: Unknown method parameter type: const WeatherStation*
-
-qrc:/qt_qml_weather_station/main.qml:38: Error: Unknown method parameter type: const WeatherStation* qrc:/qt_qml_weather_station/main.qml: 38
+- Es gibt nichts zu tun: keine Fehler vorhanden.
 
 
 

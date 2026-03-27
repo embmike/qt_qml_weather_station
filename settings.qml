@@ -119,11 +119,13 @@ Window {
         radius: 18
         color: "transparent"
 
+        /* Wird im Moment nicht verwendet
         Image {
             anchors.fill: parent
             source: "qrc:/images/weather_bg.jpg"
             fillMode: Image.PreserveAspectCrop
         }
+        */
 
         Rectangle {
             anchors.fill: parent
@@ -246,12 +248,14 @@ Window {
                             geocodeTimer.restart()
                         }
 
+                        /*
                         background: Rectangle {
                             radius: 10
                             color: "#88ffffff"
                             border.color: (!previewPending && locationField.text.trim().length > 0 && !previewValid) ? "#ff8b8b" : "#40ffffff"
                             border.width: 1
                         }
+                        */
                     }
                 }
 
@@ -277,12 +281,14 @@ Window {
                             placeholderText: ""
                             color: "#6e6e6e"
 
+                            /*
                             background: Rectangle {
                                 radius: 10
                                 color: "#88ffffff"
                                 border.color: "#40ffffff"
                                 border.width: 1
                             }
+                            */
                         }
                     }
 
@@ -304,12 +310,14 @@ Window {
                             placeholderText: ""
                             color: "#6e6e6e"
 
+                            /*
                             background: Rectangle {
                                 radius: 10
                                 color: "#88ffffff"
                                 border.color: "#40ffffff"
                                 border.width: 1
                             }
+                            */
                         }
                     }
                 }
@@ -330,13 +338,16 @@ Window {
                         currentIndex: 0
                         enabled: false
 
+                        /*
                         background: Rectangle {
                             radius: 10
                             color: "#88ffffff"
                             border.color: "#40ffffff"
                             border.width: 1
                         }
+                        */
 
+                        /*
                         contentItem: Text {
                             leftPadding: 12
                             rightPadding: 12
@@ -346,6 +357,7 @@ Window {
                             verticalAlignment: Text.AlignVCenter
                             elide: Text.ElideRight
                         }
+                        */
                     }
                 }
 
@@ -369,6 +381,7 @@ Window {
                         bottomPadding: 0
                         spacing: 0
 
+                        /*
                         indicator: Rectangle {
                             x: showSecondsCheck.width - width
                             y: showSecondsCheck.height - height
@@ -388,6 +401,7 @@ Window {
                                 visible: showSecondsCheck.checked
                             }
                         }
+                        */
                     }
                 }
 

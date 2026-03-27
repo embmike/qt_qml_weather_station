@@ -17,13 +17,13 @@ constexpr auto windowYKey = "window/y";
 }
 
 AppSettings::AppSettings(QObject *parent)
-    : QObject(parent)
+    : QObject{parent}
 {
 }
 
 void AppSettings::load(WeatherStation *weatherStation, QWindow *window) const
 {
-    QSettings settings;
+    QSettings settings{};
 
     if (weatherStation)
     {
@@ -55,7 +55,7 @@ void AppSettings::load(WeatherStation *weatherStation, QWindow *window) const
 
 void AppSettings::save(WeatherStation *weatherStation, QWindow *window) const
 {
-    QSettings settings;
+    QSettings settings{};
 
     if (weatherStation)
     {

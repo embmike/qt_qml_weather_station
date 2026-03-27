@@ -82,11 +82,13 @@ ApplicationWindow {
     }
 
     background: Item {
+        /* Wird im Moment nicht verwendet
         Image {
             anchors.fill: parent
             source: "qrc:/images/weather_bg.jpg"
             fillMode: Image.PreserveAspectCrop
         }
+        */
 
         Rectangle {
             anchors.fill: parent
